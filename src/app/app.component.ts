@@ -21,15 +21,19 @@ export class AppComponent {
     const form = document.getElementById('pokemonName') as HTMLInputElement;
     this.pokemonName = form.value;
 
-    this.pokemonService.getPokemonByName(this.pokemonName).subscribe(((response: any) => {
-      response = this.pokemon;
-    }), ((error: any) => { Swal.fire({
-      title: 'Pokemon not found!',
-      icon: 'warning',
-      confirmButtonColor: '#ff4c06',
-      confirmButtonText: 'Ok',
-    }
-    )}))
+    this.pokemonService.getPokemonByName(this.pokemonName).subscribe(
+      (response: any) => {
+        this.pokemon = response;
+      },
+      (error: any) => {
+        Swal.fire({
+          title: 'Pokemon not found!',
+          icon: 'warning',
+          confirmButtonColor: '#ff4c06',
+          confirmButtonText: 'Ok',
+        });
+      }
+    );
   }
 
 }
